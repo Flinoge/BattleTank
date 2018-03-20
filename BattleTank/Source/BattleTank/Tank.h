@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "TankAimingComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
@@ -14,10 +15,13 @@ class BATTLETANK_API ATank : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ATank();
+    void AimAt(FVector HitLocation);
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+    
+    UTankAimingComponent* TankAimingComponent = nullptr;
 
 public:	
 	// Called every frame
@@ -45,9 +49,12 @@ private:
     UChildActorComponent* Barral = nullptr;
     
     UPROPERTY(EditAnywhere)
-    float MovementSpeed = 120;
+    float MovementSpeed = 1000;
     
     UPROPERTY(EditAnywhere)
     float RotationSpeed = 120;
+    
+    UPROPERTY(EditAnywhere, Category=Firing)
+    float LaunchSpeed = 100000;
 	
 };
